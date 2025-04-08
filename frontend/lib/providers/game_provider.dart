@@ -2,11 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/car.dart';
 import '../models/game_state.dart';
 import '../repositories/car_repository.dart';
-
+import '../services/supabase_service.dart';
 
 // Game state provider with initial loading state
 final gameProvider = StateNotifierProvider<GameNotifier, GameState>((ref) {
-  final carRepository = CarRepository();
+  final carRepository = CarRepository(supabase: SupabaseService.client);
   return GameNotifier(carRepository);
 });
 
