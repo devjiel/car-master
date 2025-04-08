@@ -21,7 +21,7 @@ class GameScreen extends ConsumerWidget {
             children: [
               CircularProgressIndicator(),
               SizedBox(height: 16),
-              Text('Chargement des données...'),
+              Text('Loading data...'),
             ],
           ),
         ),
@@ -40,11 +40,11 @@ class GameScreen extends ConsumerWidget {
             children: [
               const Icon(Icons.error_outline, size: 48, color: Colors.red),
               const SizedBox(height: 16),
-              const Text('Aucune donnée disponible'),
+              const Text('No data available'),
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () => game.resetGame(),
-                child: const Text('Réessayer'),
+                child: const Text('Try again'),
               ),
             ],
           ),
@@ -78,7 +78,7 @@ class GameScreen extends ConsumerWidget {
           child: Column(
             children: [
               AspectRatio(
-                aspectRatio: 16 / 9, // Ratio paysage standard
+                aspectRatio: 16 / 9, // Standard landscape ratio
                 child: Image.asset(
                   gameState.currentCar!.imagePath,
                   fit: BoxFit.cover,
@@ -116,7 +116,7 @@ class GameScreen extends ConsumerWidget {
                                   ? () => game.resetGame()
                                   : () => game.nextQuestion(),
                               child: Text(
-                                gameState.hasFinished ? 'Recommencer' : 'Question suivante'
+                                gameState.hasFinished ? 'Restart' : 'Next question'
                               ),
                             ),
                           ),

@@ -1,4 +1,4 @@
--- Création de la table cars
+-- Create cars table
 CREATE TABLE IF NOT EXISTS cars (
   id SERIAL PRIMARY KEY,
   brand TEXT NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS cars (
   answer TEXT NOT NULL
 );
 
--- Insertion des données de démonstration
+-- Insert demo data
 INSERT INTO cars (brand, model, image_path, answer) VALUES
   ('Porsche', '911 GT3', 'assets/images/cars/porsche_911_gt3.webp', 'Porsche 911 GT3'),
   ('Ferrari', '488 Pista', 'assets/images/cars/ferrari_488_pista.webp', 'Ferrari 488 Pista'),

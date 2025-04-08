@@ -1,46 +1,46 @@
-# Configuration de Supabase
+# Supabase Configuration
 
-Ce projet utilise Supabase comme base de données. Voici comment configurer l'environnement local.
+This project uses Supabase as a database. Here's how to set up the local environment.
 
-## Prérequis
+## Prerequisites
 
-- Docker et Docker Compose
+- Docker and Docker Compose
 - Git
 
-## Installation de Supabase en local
+## Installing Supabase locally
 
-1. Clonez le projet Supabase
+1. Clone the Supabase project
 
 ```bash
 git clone https://github.com/supabase/supabase
 cd supabase/docker
 ```
 
-2. Copiez le fichier exemple de configuration
+2. Copy the example configuration file
 
 ```bash
 cp .env.example .env
 ```
 
-3. Démarrez Supabase
+3. Start Supabase
 
 ```bash
 docker-compose up -d
 ```
 
-Supabase sera disponible à l'adresse `http://localhost:8000`.
+Supabase will be available at `http://localhost:8000`.
 
-## Configuration de la base de données
+## Database Configuration
 
-1. Connectez-vous à l'interface de Supabase à l'adresse `http://localhost:8000`
-2. Utilisez les identifiants par défaut (cf. fichier .env)
+1. Log in to the Supabase interface at `http://localhost:8000`
+2. Use the default credentials (see .env file)
 
-3. Récupérez votre clé anonyme dans l'interface (API section)
+3. Retrieve your anonymous key from the interface (API section)
 
-4. Importez le script SQL pour créer la table des voitures:
+4. Import the SQL script to create the cars table:
 
 ```sql
--- Créer la table cars
+-- Create cars table
 CREATE TABLE IF NOT EXISTS cars (
   id SERIAL PRIMARY KEY,
   brand TEXT NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS cars (
   answer TEXT NOT NULL
 );
 
--- Insérer des données de démonstration
+-- Insert demo data
 INSERT INTO cars (brand, model, image_path, answer) VALUES
   ('Porsche', '911 GT3', 'assets/images/cars/porsche_911_gt3.webp', 'Porsche 911 GT3'),
   ('Ferrari', '488 Pista', 'assets/images/cars/ferrari_488_pista.webp', 'Ferrari 488 Pista'),
@@ -58,26 +58,26 @@ INSERT INTO cars (brand, model, image_path, answer) VALUES
   ('Aston Martin', 'DB11', 'assets/images/cars/aston_martin_db11.jpg', 'Aston Martin DB11');
 ```
 
-## Configuration de l'application Flutter
+## Flutter Application Configuration
 
-1. Copiez le fichier `.env.example` vers `.env` dans le dossier `frontend`:
+1. Copy the `.env.example` file to `.env` in the `frontend` folder:
 
 ```bash
 cd frontend
 cp .env.example .env
 ```
 
-2. Modifiez le fichier `.env` avec votre clé anonyme Supabase:
+2. Update the `.env` file with your Supabase anonymous key:
 
 ```
 SUPABASE_URL=http://localhost:8000
-SUPABASE_ANON_KEY=votre-clé-anonyme
+SUPABASE_ANON_KEY=your-anon-key
 ```
 
-3. Lancez l'application Flutter:
+3. Launch the Flutter application:
 
 ```bash
 flutter run
 ```
 
-L'application utilisera automatiquement les variables d'environnement définies dans le fichier `.env`. 
+The application will automatically use the environment variables defined in the `.env` file. 

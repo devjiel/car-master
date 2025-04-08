@@ -19,7 +19,7 @@ class CarRepository {
         answer: carData['answer'],
       )).toList();
     } catch (e) {
-      print('Erreur lors de la récupération des voitures: $e');
+      print('Error fetching cars: $e');
       return [];
     }
   }
@@ -40,7 +40,7 @@ class CarRepository {
         answer: response['answer'],
       );
     } catch (e) {
-      print('Erreur lors de la récupération de la voiture: $e');
+      print('Error fetching car: $e');
       return null;
     }
   }

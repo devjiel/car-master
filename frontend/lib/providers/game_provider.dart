@@ -4,7 +4,7 @@ import '../models/game_state.dart';
 import '../repositories/car_repository.dart';
 
 
-// Fournisseur d'état du jeu avec un état de chargement initial
+// Game state provider with initial loading state
 final gameProvider = StateNotifierProvider<GameNotifier, GameState>((ref) {
   final carRepository = CarRepository();
   return GameNotifier(carRepository);
@@ -21,14 +21,14 @@ class GameNotifier extends StateNotifier<GameState> {
     isAnswered: false,
     hasFinished: false,
     cars: [],
-    isLoading: true, // Commencer avec l'état de chargement
+    isLoading: true, // Start with loading state
   )) {
     _initGame();
   }
 
   List<String> _generateOptions(Car currentCar, List<Car> allCars) {
     if (allCars.length < 4) {
-      // Si pas assez de voitures, répéter certaines options
+      // If not enough cars, repeat some options
       final options = [currentCar.answer];
       final otherAnswers = allCars
           .where((car) => car.id != currentCar.id)
@@ -37,7 +37,7 @@ class GameNotifier extends StateNotifier<GameState> {
       
       options.addAll(otherAnswers);
       
-      // Remplir jusqu'à 4 options
+      // Fill up to 4 options
       while (options.length < 4) {
         options.add(otherAnswers.isNotEmpty ? otherAnswers[0] : currentCar.answer);
       }
@@ -70,14 +70,14 @@ class GameNotifier extends StateNotifier<GameState> {
 
       state = state.copyWith(
         cars: cars..shuffle(),
-        isLoading: false, // Désactiver l'état de chargement
+        isLoading: false, // Disable loading state
       );
       
       _generateOptionsForCurrentCar();
     } catch (e) {
-      // En cas d'erreur, désactiver l'état de chargement
+      // In case of error, disable loading state
       state = state.copyWith(isLoading: false);
-      print('Erreur lors de l\'initialisation du jeu: $e');
+      print('Error during game initialization: $e');
     }
   }
 
@@ -103,7 +103,7 @@ class GameNotifier extends StateNotifier<GameState> {
   void nextQuestion() {
     if (!state.isAnswered || state.cars.isEmpty || state.currentCar == null) return;
     
-    // Si on est à la dernière question
+    // If we're at the last question
     if (state.currentQuestionIndex >= state.cars.length - 1) {
       state = state.copyWith(hasFinished: true);
       return;
@@ -119,7 +119,7 @@ class GameNotifier extends StateNotifier<GameState> {
   }
   
   Future<void> resetGame() async {
-    // Mettre en état de chargement pendant la réinitialisation
+    // Set loading state during reset
     state = state.copyWith(isLoading: true);
     
     try {
@@ -143,7 +143,7 @@ class GameNotifier extends StateNotifier<GameState> {
       _generateOptionsForCurrentCar();
     } catch (e) {
       state = state.copyWith(isLoading: false);
-      print('Erreur lors de la réinitialisation du jeu: $e');
+      print('Error during game reset: $e');
     }
   }
 } 
