@@ -1,0 +1,42 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+desktop.ini
+*.log
+*.tmp
+
+# Fichiers d'éditeur
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Fichiers de configuration sensibles
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Les fichiers ignorés spécifiques aux sous-dossiers sont définis
+# dans les fichiers .gitignore respectifs des dossiers frontend/ et backend/
+
+# Dossiers node_modules (au cas où)
+node_modules/
+
+# Dossiers de build et de cache
+dist/
+build/
+.cache/
+.tmp/ 
