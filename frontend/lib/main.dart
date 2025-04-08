@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'theme/app_theme.dart';
-import 'screens/game_screen.dart';
+import 'screens/main_screen.dart';
 import 'services/supabase_service.dart';
 
 void main() async {
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       title: 'Car Master',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      home: const GameScreen(),
+      home: const MainScreen(),
     );
   }
 }
