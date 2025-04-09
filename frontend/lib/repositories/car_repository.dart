@@ -1,18 +1,19 @@
 import 'package:car_master/models/car_entity.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+const int _kCarsPerQuestion = 25;
+
 class CarRepository {
   final SupabaseClient _supabase;
 
-  // Constructor with optional parameter
   CarRepository({required SupabaseClient supabase}) : _supabase = supabase;
 
-  Future<List<CarEntityModel>> getAllCars() async {
+  Future<List<CarEntityModel>> getRandomCars() async {
     try {
       final response = await _supabase
           .from('cars')
           .select()
-          .order('id');
+          .limit(_kCarsPerQuestion);
       
       final result = <CarEntityModel>[];
       
