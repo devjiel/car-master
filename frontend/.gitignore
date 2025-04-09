@@ -88,3 +88,6 @@ coverage/
 .DS_Store
 .vscode/
 *.log 
+
+# Fichiers générés
+**/lib/generated/

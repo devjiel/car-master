@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:car_master/models/car.dart';
+import 'package:car_master/models/car_entity.dart';
 import 'package:car_master/providers/game_provider.dart';
 import 'package:car_master/repositories/car_repository.dart';
 
@@ -8,31 +8,31 @@ import 'package:car_master/repositories/car_repository.dart';
 class MockCarRepository extends Mock implements CarRepository {}
 
 void main() {
-  // Liste de voitures de test
+
   final testCars = [
-    const Car(
-      id: '1',
+    const CarEntityModel(
+      id: 1,
       brand: 'Tesla',
       model: 'Model S',
       imagePath: 'assets/images/cars/tesla_model_s.jpg',
       answer: 'Tesla Model S',
     ),
-    const Car(
-      id: '2',
+    const CarEntityModel(
+      id: 2,
       brand: 'BMW',
       model: 'i8',
       imagePath: 'assets/images/cars/bmw_i8.jpg',
       answer: 'BMW i8',
     ),
-    const Car(
-      id: '3',
+    const CarEntityModel(
+      id: 3,
       brand: 'Audi',
       model: 'R8',
       imagePath: 'assets/images/cars/audi_r8.jpg',
       answer: 'Audi R8',
     ),
-    const Car(
-      id: '4',
+    const CarEntityModel(
+      id: 4,
       brand: 'Mercedes',
       model: 'AMG GT',
       imagePath: 'assets/images/cars/mercedes_amg_gt.jpg',

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/car.dart';
+import '../models/car_entity.dart';
 import '../models/game_state.dart';
 import '../repositories/car_repository.dart';
 import '../services/supabase_service.dart';
@@ -26,7 +26,7 @@ class GameNotifier extends StateNotifier<GameState> {
     _initGame();
   }
 
-  List<String> _generateOptions(Car currentCar, List<Car> allCars) {
+  List<String> _generateOptions(CarEntityModel currentCar, List<CarEntityModel> allCars) {
     if (allCars.length < 4) {
       // If not enough cars, repeat some options
       final options = [currentCar.answer];
@@ -55,7 +55,7 @@ class GameNotifier extends StateNotifier<GameState> {
     }
   }
 
-  bool _isCorrectAnswer(String selectedAnswer, Car car) {
+  bool _isCorrectAnswer(String selectedAnswer, CarEntityModel car) {
     return selectedAnswer == car.answer;
   }
 
