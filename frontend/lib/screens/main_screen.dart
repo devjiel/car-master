@@ -24,7 +24,7 @@ class MainScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 ),
-                child: const Text('Solo mode', style: TextStyle(fontSize: 18)),
+                child: const Text('Start Quizz', style: TextStyle(fontSize: 18)),
               ),
             ),
           ],
