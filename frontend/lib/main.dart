@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'theme/app_theme.dart';
-import 'screens/main_screen.dart';
+import 'router/app_router.dart';
 import 'services/supabase_service.dart';
 
 void main() async {
@@ -21,16 +21,19 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Récupération du routeur via le provider
+    final router = ref.watch(routerProvider);
+
+    return MaterialApp.router(
       title: 'Car Master',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      home: const MainScreen(),
+      routerConfig: router,
     );
   }
 }

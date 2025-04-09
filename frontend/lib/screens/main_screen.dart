@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'game_screen.dart';
+import 'package:go_router/go_router.dart';
+import '../router/app_router.dart';
+
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
@@ -7,7 +9,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Games'),
+        title: const Text('Car Master'),
       ),
       body: SafeArea(
         child: Column(
@@ -17,9 +19,12 @@ class MainScreen extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => GameScreen()));
+                  context.goNamed(RouteNames.game);
                 },
-                child: const Text('Solo mode'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                ),
+                child: const Text('Solo mode', style: TextStyle(fontSize: 18)),
               ),
             ),
           ],
