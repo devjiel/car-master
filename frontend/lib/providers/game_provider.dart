@@ -10,6 +10,7 @@ final gameProvider = StateNotifierProvider<GameNotifier, GameState>((ref) {
   return GameNotifier(carRepository);
 });
 
+const kCarsPerQuestion = 5;
 
 class GameNotifier extends StateNotifier<GameState> {
   final CarRepository _carRepository;
@@ -27,7 +28,7 @@ class GameNotifier extends StateNotifier<GameState> {
   }
 
   List<String> _generateOptions(CarEntityModel currentCar, List<CarEntityModel> allCars) {
-    if (allCars.length < 4) {
+    if (allCars.length < kCarsPerQuestion) {
       // If not enough cars, repeat some options
       final options = [currentCar.answer];
       final otherAnswers = allCars
@@ -38,7 +39,7 @@ class GameNotifier extends StateNotifier<GameState> {
       options.addAll(otherAnswers);
       
       // Fill up to 4 options
-      while (options.length < 4) {
+      while (options.length < kCarsPerQuestion) {
         options.add(otherAnswers.isNotEmpty ? otherAnswers[0] : currentCar.answer);
       }
       
@@ -50,7 +51,7 @@ class GameNotifier extends StateNotifier<GameState> {
           .toList()
         ..shuffle();
   
-      final options = [currentCar.answer, ...otherAnswers.take(3)]..shuffle();
+      final options = [currentCar.answer, ...otherAnswers.take(kCarsPerQuestion - 1)]..shuffle();
       return options;
     }
   }
@@ -61,9 +62,9 @@ class GameNotifier extends StateNotifier<GameState> {
 
   Future<void> _initGame() async {
     try {
-      final cars = await _carRepository.getAllCars();
+      final cars = await _carRepository.getRandomCars();
       
-      if (cars.isEmpty) {
+      if (cars.isEmpty || cars.length < kCarsPerQuestion) {
         state = state.copyWith(isLoading: false);
         return;
       }
@@ -123,9 +124,9 @@ class GameNotifier extends StateNotifier<GameState> {
     state = state.copyWith(isLoading: true);
     
     try {
-      final cars = await _carRepository.getAllCars();
+      final cars = await _carRepository.getRandomCars();
       
-      if (cars.isEmpty) {
+      if (cars.isEmpty || cars.length < kCarsPerQuestion) {
         state = state.copyWith(isLoading: false);
         return;
       }
