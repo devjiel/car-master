@@ -9,7 +9,7 @@ abstract class CarEntityModel with _$CarEntityModel {
     required int id,
     required String brand,
     required String model,
-    @JsonKey(name: 'image_path') required String imagePath,
+    @JsonKey(name: 'image_url') required String imageUrl,
     required String answer,
   }) = _CarEntityModel;
 
