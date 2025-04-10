@@ -29,5 +29,19 @@ CREATE TABLE IF NOT EXISTS manufacturers (
 INSERT INTO manufacturers (name, country, logo_url, description, founding_year) VALUES
   ('Porsche', 'Germany', '', 'Porsche is a German automobile manufacturer specializing in high-performance sports cars and SUVs.', 1931),
   ('Ferrari', 'Italy', '', 'Ferrari is an Italian luxury sports car manufacturer based in Maranello.', 1939),
-  ('Lamborghini', 'Italy', '', 'Lamborghini is an Italian luxury sports car manufacturer based in Sant''Agata Bolognese.', 1963)
+  ('Lamborghini', 'Italy', '', 'Lamborghini is an Italian luxury sports car manufacturer based in Sant''Agata Bolognese.', 1963);
+
+-- Countries table
+CREATE TABLE countries (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  name TEXT NOT NULL UNIQUE,
+  code TEXT NOT NULL UNIQUE, -- ISO country code
+  flag_url TEXT
+);
+
+-- Insert countries
+INSERT INTO countries (name, code, flag_url) VALUES
+  ('Germany', 'DE', 'assets/images/flags/germany.png'),
+  ('Italy', 'IT', 'assets/images/flags/italy.png'),
+  ('United States', 'US', 'assets/images/flags/united_states.png');
 
