@@ -94,3 +94,10 @@ INSERT INTO quiz_cars (brand, model, image_url, answer) VALUES
   ('Lamborghini', 'Huracan', 'assets/images/cars/lamborghini_huracan.jpg', 'Lamborghini Huracan'),
   ('McLaren', '720S', 'assets/images/cars/mcLaren 720S.jpg', 'McLaren 720S'),
   ('Aston Martin', 'DB11', 'assets/images/cars/aston_martin_db11.jpg', 'Aston Martin DB11');
+
+-- Add indexes for efficient lookups and joins
+CREATE INDEX idx_quiz_cars_encyclopedia_entry_id ON quiz_cars(encyclopedia_entry_id);
+CREATE INDEX idx_car_encyclopedia_entries_quiz_car_id ON car_encyclopedia_entries(id);
+CREATE INDEX idx_car_encyclopedia_entries_manufacturer_id ON car_encyclopedia_entries(manufacturer_id);
+CREATE INDEX idx_car_encyclopedia_entries_country_id ON car_encyclopedia_entries(country_id);
+CREATE INDEX idx_car_encyclopedia_entries_body_style_id ON car_encyclopedia_entries(body_style_id);
