@@ -1,20 +1,3 @@
--- Create quiz_cars table
-CREATE TABLE IF NOT EXISTS quiz_cars (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  brand TEXT NOT NULL,
-  model TEXT NOT NULL,
-  image_url TEXT NOT NULL,
-  answer TEXT NOT NULL
-);
-
--- Insert quiz_cars
-INSERT INTO quiz_cars (brand, model, image_url, answer) VALUES
-  ('Porsche', '911 GT3', 'assets/images/cars/porsche_911_gt3.webp', 'Porsche 911 GT3'),
-  ('Ferrari', '488 Pista', 'assets/images/cars/ferrari_488_pista.webp', 'Ferrari 488 Pista'),
-  ('Lamborghini', 'Huracan', 'assets/images/cars/lamborghini_huracan.jpg', 'Lamborghini Huracan'),
-  ('McLaren', '720S', 'assets/images/cars/mcLaren 720S.jpg', 'McLaren 720S'),
-  ('Aston Martin', 'DB11', 'assets/images/cars/aston_martin_db11.jpg', 'Aston Martin DB11');
-
 -- Manufacturers table
 CREATE TABLE IF NOT EXISTS manufacturers (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -82,7 +65,23 @@ CREATE TABLE car_encyclopedia_entries (
   -- Historical context
   history TEXT,
   notable_facts JSONB, -- Array of facts
-  awards JSONB, -- Array of awards
-  -- Quiz car id
-  quiz_car_id UUID REFERENCES quiz_cars(id)
+  awards JSONB -- Array of awards
 );
+
+-- Create quiz_cars table
+CREATE TABLE IF NOT EXISTS quiz_cars (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  brand TEXT NOT NULL,
+  model TEXT NOT NULL,
+  image_url TEXT NOT NULL,
+  answer TEXT NOT NULL,
+  encyclopedia_entry_id UUID REFERENCES car_encyclopedia_entries(id)
+);
+
+-- Insert quiz_cars
+INSERT INTO quiz_cars (brand, model, image_url, answer) VALUES
+  ('Porsche', '911 GT3', 'assets/images/cars/porsche_911_gt3.webp', 'Porsche 911 GT3'),
+  ('Ferrari', '488 Pista', 'assets/images/cars/ferrari_488_pista.webp', 'Ferrari 488 Pista'),
+  ('Lamborghini', 'Huracan', 'assets/images/cars/lamborghini_huracan.jpg', 'Lamborghini Huracan'),
+  ('McLaren', '720S', 'assets/images/cars/mcLaren 720S.jpg', 'McLaren 720S'),
+  ('Aston Martin', 'DB11', 'assets/images/cars/aston_martin_db11.jpg', 'Aston Martin DB11');
