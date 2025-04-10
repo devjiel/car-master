@@ -68,6 +68,15 @@ CREATE TABLE car_encyclopedia_entries (
   awards JSONB -- Array of awards
 );
 
+-- Encyclopedia images table
+CREATE TABLE car_encyclopedia_images (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  encyclopedia_entry_id UUID REFERENCES car_encyclopedia_entries(id),
+  image_url TEXT NOT NULL,
+  caption TEXT,
+  display_order INTEGER NOT NULL
+);
+
 -- Create quiz_cars table
 CREATE TABLE IF NOT EXISTS quiz_cars (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
