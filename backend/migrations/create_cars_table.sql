@@ -45,3 +45,16 @@ INSERT INTO countries (name, code, flag_url) VALUES
   ('Italy', 'IT', 'assets/images/flags/italy.png'),
   ('United States', 'US', 'assets/images/flags/united_states.png');
 
+-- Body styles table
+CREATE TABLE body_styles (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  name TEXT NOT NULL UNIQUE,
+  description TEXT,
+  icon_url TEXT
+);
+
+-- Insert body styles
+INSERT INTO body_styles (name, description, icon_url) VALUES
+  ('Coupe', 'A two-door vehicle with a sloping roofline and a fixed rear window.', 'assets/images/body_styles/coupe.png'),
+  ('Convertible', 'A two-door vehicle with a retractable roof.', 'assets/images/body_styles/convertible.png'),
+  ('Sedan', 'A four-door vehicle with a fixed roof.', 'assets/images/body_styles/sedan.png');
