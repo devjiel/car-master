@@ -1,0 +1,20 @@
+# Database Configuration
+[db]
+port = 5432
+shadow_port = 54320
+major_version = 15
+
+# API Configuration
+[api]
+port = 54321
+schemas = ["public", "storage"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+# Studio Configuration
+[studio]
+port = 54323
+
+# Storage Configuration
+[storage]
+file_size_limit = "50MiB" 

@@ -1,0 +1,77 @@
+-- Manufacturers table
+CREATE TABLE IF NOT EXISTS manufacturers (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  name TEXT NOT NULL UNIQUE,
+  country TEXT NOT NULL,
+  logo_url TEXT,
+  description TEXT,
+  founding_year INTEGER
+);
+
+-- Countries table
+CREATE TABLE countries (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  name TEXT NOT NULL UNIQUE,
+  code TEXT NOT NULL UNIQUE, -- ISO country code
+  flag_url TEXT
+);
+
+-- Body styles table
+CREATE TABLE body_styles (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  name TEXT NOT NULL UNIQUE,
+  description TEXT,
+  icon_url TEXT
+);
+
+  -- Car encyclopedia entries table
+CREATE TABLE car_encyclopedia_entries (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  short_description TEXT NOT NULL,
+  description TEXT NOT NULL,
+  manufacturer_id UUID REFERENCES manufacturers(id),
+  year TEXT NOT NULL,
+  country_id UUID REFERENCES countries(id),
+  designer_names JSONB, -- Array of names
+  body_style_id UUID REFERENCES body_styles(id),
+  -- Technical specifications
+  engine TEXT NOT NULL,
+  power TEXT NOT NULL,
+  torque TEXT NOT NULL,
+  drivetrain TEXT NOT NULL,
+  acceleration TEXT,
+  top_speed TEXT NOT NULL,
+  dimensions TEXT NOT NULL,
+  weight TEXT NOT NULL,
+  additional_specs JSONB, -- Key-value pairs for model-specific specs
+  -- Historical context
+  history TEXT,
+  notable_facts JSONB, -- Array of facts
+  awards JSONB -- Array of awards
+);
+
+-- Encyclopedia images table
+CREATE TABLE car_encyclopedia_images (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  encyclopedia_entry_id UUID REFERENCES car_encyclopedia_entries(id),
+  image_url TEXT NOT NULL,
+  caption TEXT,
+  display_order INTEGER NOT NULL
+);
+
+-- Create quiz_cars table
+CREATE TABLE IF NOT EXISTS quiz_cars (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  brand TEXT NOT NULL,
+  model TEXT NOT NULL,
+  image_url TEXT NOT NULL,
+  answer TEXT NOT NULL,
+  encyclopedia_entry_id UUID REFERENCES car_encyclopedia_entries(id)
+);
+
+-- Add indexes for efficient lookups and joins
+CREATE INDEX idx_quiz_cars_encyclopedia_entry_id ON quiz_cars(encyclopedia_entry_id);
+CREATE INDEX idx_car_encyclopedia_entries_quiz_car_id ON car_encyclopedia_entries(id);
+CREATE INDEX idx_car_encyclopedia_entries_manufacturer_id ON car_encyclopedia_entries(manufacturer_id);
+CREATE INDEX idx_car_encyclopedia_entries_country_id ON car_encyclopedia_entries(country_id);
+CREATE INDEX idx_car_encyclopedia_entries_body_style_id ON car_encyclopedia_entries(body_style_id);
