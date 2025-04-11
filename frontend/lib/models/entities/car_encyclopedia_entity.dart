@@ -54,7 +54,7 @@ abstract class CarEncyclopediaEntity with _$CarEncyclopediaEntity {
     @JsonKey(name: 'short_description')
     required String shortDescription,
     @JsonKey(name: 'default_image_url')
-    String? defaultImageUrl,
+    required String defaultImageUrl,
     required String description,
     @JsonKey(name: 'manufacturer_id')
     required String manufacturerId,

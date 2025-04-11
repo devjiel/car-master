@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:car_master/models/car_encyclopedia_detail.dart';
 import 'package:car_master/models/entities/car_encyclopedia_entity.dart';
 import 'package:car_master/providers/encyclopedia_provider.dart';
@@ -80,6 +78,7 @@ void main() {
             history: 'History',
             notableFacts: [],
             awards: [],
+            defaultImageUrl: 'https://via.placeholder.com/150',
           ),
         );
         
@@ -125,6 +124,7 @@ void main() {
             history: 'History',
             notableFacts: [],
             awards: [],
+            defaultImageUrl: 'https://via.placeholder.com/150',
           ),
         );
         
@@ -185,6 +185,7 @@ void main() {
             history: 'History',
             notableFacts: [],
             awards: [],
+            defaultImageUrl: 'https://via.placeholder.com/150',
           ),
         );
         
@@ -211,6 +212,7 @@ void main() {
             history: 'History',
             notableFacts: [],
             awards: [],
+            defaultImageUrl: 'https://via.placeholder.com/150',
           ),
         );
         
@@ -266,6 +268,7 @@ void main() {
             history: 'History',
             notableFacts: [],
             awards: [],
+            defaultImageUrl: 'https://via.placeholder.com/150',
           ),
         );
         
@@ -292,6 +295,7 @@ void main() {
             history: 'History',
             notableFacts: [],
             awards: [],
+            defaultImageUrl: 'https://via.placeholder.com/150',
           ),
         );
         
@@ -357,6 +361,7 @@ void main() {
               history: 'History',
               notableFacts: [],
               awards: [],
+              defaultImageUrl: 'https://via.placeholder.com/150',
             ),
           );
           
