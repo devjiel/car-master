@@ -92,7 +92,7 @@ class EncyclopediaRepository {
   Future<List<CarEncyclopediaImage>> getCarEncyclopediaImages(String carId) async {
     try {
       final response = await _supabase
-          .from('encyclopedia_images')
+          .from('car_encyclopedia_images')
           .select('*')
           .eq('encyclopedia_entry_id', carId)
           .order('display_order');

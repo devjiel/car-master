@@ -158,7 +158,7 @@ void main() {
       await mockSupabase.from('car_encyclopedia_entries').insert([mockCarWithRelations]);
       
       // Insertion des images pour la voiture
-      await mockSupabase.from('encyclopedia_images').insert([
+      await mockSupabase.from('car_encyclopedia_images').insert([
         {
           'id': 'img1',
           'encyclopedia_entry_id': carId,
