@@ -8,11 +8,11 @@ class EncyclopediaRepository {
 
   EncyclopediaRepository({required SupabaseClient supabase}) : _supabase = supabase;
 
-  Future<List<CarEncyclopediaEntity>> getCarEncyclopediaSummaries({int page = 0}) async {
+  Future<List<CarEncyclopediaEntity>> getCarEncyclopediaList({int page = 0}) async {
     try {
       final response = await _supabase
           .from('car_encyclopedia_entries')
-          .select('*')
+          .select('*') // TODO: add only relevant fields
           .range(page * pageSize, (page + 1) * pageSize - 1)
           .order('name', ascending: true);
 
@@ -22,7 +22,7 @@ class EncyclopediaRepository {
         try {
           result.add(CarEncyclopediaEntity.fromJson(json));
         } catch (e) {
-          print('Error parsing encyclopedia entry summary: $e');
+          print('Error parsing encyclopedia entry list: $e');
         }
       }
       

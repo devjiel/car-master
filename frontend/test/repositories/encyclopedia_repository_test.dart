@@ -52,7 +52,7 @@ void main() {
       await mockSupabase.from('car_encyclopedia_entries').insert(mockEntries);
 
       // Act - First page
-      final firstPage = await encyclopediaRepository.getCarEncyclopediaSummaries(page: 0);
+      final firstPage = await encyclopediaRepository.getCarEncyclopediaList(page: 0);
 
       // Assert - First page
       expect(firstPage.length, 20); // pageSize
@@ -61,7 +61,7 @@ void main() {
       expect(firstPage[0].defaultImageUrl?.contains('example.com'), true);
 
       // Act - Second page
-      final secondPage = await encyclopediaRepository.getCarEncyclopediaSummaries(page: 1);
+      final secondPage = await encyclopediaRepository.getCarEncyclopediaList(page: 1);
 
       // Assert - Second page
       expect(secondPage.length, 5); // remaining items
@@ -69,7 +69,7 @@ void main() {
 
     test('should handle empty response', () async {
       // Act
-      final result = await encyclopediaRepository.getCarEncyclopediaSummaries();
+      final result = await encyclopediaRepository.getCarEncyclopediaList();
 
       // Assert
       expect(result, isEmpty);
@@ -94,7 +94,7 @@ void main() {
 
       // Act & Assert
       expect(
-        () => encyclopediaRepository.getCarEncyclopediaSummaries(),
+        () => encyclopediaRepository.getCarEncyclopediaList(),
         throwsA(isA<PostgrestException>()),
       );
     });
