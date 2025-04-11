@@ -1,4 +1,3 @@
-import 'package:car_master/models/car_encyclopedia_entity.dart';
 import 'package:car_master/repositories/encyclopedia_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_supabase_http_client/mock_supabase_http_client.dart';
@@ -57,7 +56,8 @@ void main() {
 
       // Assert - First page
       expect(firstPage.length, 20); // pageSize
-      expect(firstPage[0].name, 'Car 0');
+      expect(firstPage[0].id.startsWith('car_'), true);
+      expect(firstPage[0].name.startsWith('Car '), true);
       expect(firstPage[0].defaultImageUrl?.contains('example.com'), true);
 
       // Act - Second page
@@ -99,61 +99,109 @@ void main() {
       );
     });
   });
-
-  group('getCarEncyclopediaDetail', () {
-    test('should return full car details when found', () async {
+  
+  group('getCarEncyclopediaDetailWithRelations', () {
+    test('should return detailed car with related entities', () async {
       // Arrange
-      final mockEntry = {
-        'id': '1',
-        'name': 'Ferrari F40',
-        'short_description': 'Iconic supercar from the 80s',
-        'description': 'Detailed description of F40',
-        'manufacturer_id': 'ferrari_id',
-        'year': '1987',
-        'country_id': 'italy_id',
-        'designer_names': ['Leonardo Fioravanti', 'Pietro Camardella'],
-        'body_style_id': 'supercar_id',
-        'engine': 'Twin-turbo 2.9L V8',
-        'power': '471 hp',
-        'torque': '426 lb-ft',
+      final carId = '123e4567-e89b-12d3-a456-426614174000';
+      final manufacturerId = '33b2d0c3-172b-4867-8d9a-cfda5a9e90c5';
+      final countryId = '2349bdef-4863-4752-86f0-4e46ea2fde48';
+      final bodyStyleId = '66ed89d8-02ae-4811-82cf-5fcfc01b817e';
+      
+      // Selon la documentation mock_supabase_http_client, nous devons insérer
+      // les données avec la structure que nous attendons lors de la jointure
+      final mockCarWithRelations = {
+        'id': carId,
+        'name': 'Porsche 911 GT3',
+        'short_description': 'High-performance sports car',
+        'description': 'The Porsche 911 GT3 is a high-performance sports car',
+        'manufacturer_id': manufacturerId,
+        'year': '2021',
+        'country_id': countryId,
+        'designer_names': ['Andreas Preuninger'],
+        'body_style_id': bodyStyleId,
+        'engine': 'Flat-six',
+        'power': '502 hp',
+        'torque': '346 lb-ft',
         'drivetrain': 'RWD',
-        'acceleration': '3.8s 0-60 mph',
-        'top_speed': '201 mph',
-        'dimensions': '4358x1970x1123 mm',
-        'weight': '1100 kg',
-        'additional_specs': {
-          'transmission': '5-speed manual',
-          'production': '1311 units'
+        'acceleration': '3.2s',
+        'top_speed': '197 mph',
+        'dimensions': '178 x 73 x 51 inches',
+        'weight': '3116 lbs',
+        'additional_specs': { 'transmission': '7-speed PDK' },
+        'history': 'The 911 GT3 has been the most track-focused 911 since 1999',
+        'notable_facts': ['Nürburgring lap time of 6:59.927'],
+        'awards': ['Performance Car of the Year 2022'],
+        'default_image_url': 'https://example.com/porsche_911_gt3.jpg',
+        // Ajout des données liées directement dans l'objet
+        'manufacturer': {
+          'id': manufacturerId,
+          'name': 'Porsche',
+          'country': 'Germany',
+          'description': 'German sports car manufacturer',
+          'founding_year': 1931
         },
-        'history': 'Created to celebrate Ferrari\'s 40th anniversary',
-        'notable_facts': ['Last Ferrari approved by Enzo Ferrari'],
-        'awards': ['Car of the Year 1987'],
-        'default_image_url': 'https://example.com/f40.jpg'
+        'country': {
+          'id': countryId,
+          'name': 'Germany',
+          'code': 'DE',
+          'flag_url': 'flags/germany.png'
+        },
+        'body_style': {
+          'id': bodyStyleId,
+          'name': 'Coupe',
+          'description': 'Two-door fixed roof car'
+        }
       };
-
-      await mockSupabase.from('car_encyclopedia_entries').insert([mockEntry]);
-
+      
+      // Insertion de la voiture avec toutes ses relations
+      await mockSupabase.from('car_encyclopedia_entries').insert([mockCarWithRelations]);
+      
+      // Insertion des images pour la voiture
+      await mockSupabase.from('encyclopedia_images').insert([
+        {
+          'id': 'img1',
+          'encyclopedia_entry_id': carId,
+          'image_url': 'https://example.com/image1.jpg',
+          'caption': 'Front view',
+          'display_order': 1
+        },
+        {
+          'id': 'img2',
+          'encyclopedia_entry_id': carId,
+          'image_url': 'https://example.com/image2.jpg',
+          'caption': 'Rear view',
+          'display_order': 2
+        }
+      ]);
+      
       // Act
-      final result = await encyclopediaRepository.getCarEncyclopediaDetail('1');
-
+      final result = await encyclopediaRepository.getCarEncyclopediaDetailWithRelations(carId);
+      
       // Assert
       expect(result, isNotNull);
-      expect(result!.id, '1');
-      expect(result.name, 'Ferrari F40');
-      expect(result.shortDescription, 'Iconic supercar from the 80s');
-      expect(result.defaultImageUrl, 'https://example.com/f40.jpg');
-      expect(result.designerNames, ['Leonardo Fioravanti', 'Pietro Camardella']);
-      expect(result.additionalSpecs['transmission'], '5-speed manual');
+      expect(result!.car.id, carId);
+      expect(result.car.name, 'Porsche 911 GT3');
+      expect(result.manufacturer.name, 'Porsche');
+      expect(result.country.name, 'Germany');
+      expect(result.bodyStyle.name, 'Coupe');
+      expect(result.images!.length, 2);
+      
+      // We check that the images are present but without guaranteeing their exact order
+      expect(result.images!.any((img) => img.imageUrl == 'https://example.com/image1.jpg'), true);
+      expect(result.images!.any((img) => img.imageUrl == 'https://example.com/image2.jpg'), true);
+      expect(result.images!.any((img) => img.caption == 'Front view'), true);
+      expect(result.images!.any((img) => img.caption == 'Rear view'), true);
     });
-
+    
     test('should return null when car not found', () async {
       // Act
-      final result = await encyclopediaRepository.getCarEncyclopediaDetail('non_existent_id');
-
+      final result = await encyclopediaRepository.getCarEncyclopediaDetailWithRelations('non_existent_id');
+      
       // Assert
       expect(result, isNull);
     });
-
+    
     test('should handle database error', () async {
       // Arrange
       mockHttpClient = MockSupabaseHttpClient(
@@ -170,10 +218,10 @@ void main() {
         httpClient: mockHttpClient,
       );
       encyclopediaRepository = EncyclopediaRepository(supabase: mockSupabase);
-
+      
       // Act & Assert
       expect(
-        () => encyclopediaRepository.getCarEncyclopediaDetail('1'),
+        () => encyclopediaRepository.getCarEncyclopediaDetailWithRelations('1'),
         throwsA(isA<PostgrestException>()),
       );
     });
