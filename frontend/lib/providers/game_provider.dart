@@ -1,19 +1,19 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/quiz_car_entity.dart';
 import '../models/game_state.dart';
-import '../repositories/car_repository.dart';
+import '../repositories/quiz_car_repository.dart';
 import '../services/supabase_service.dart';
 
 // Game state provider with initial loading state
 final gameProvider = StateNotifierProvider<GameNotifier, GameState>((ref) {
-  final carRepository = CarRepository(supabase: SupabaseService.client);
+  final carRepository = QuizCarRepository(supabase: SupabaseService.client);
   return GameNotifier(carRepository);
 });
 
 const kCarsPerQuestion = 5;
 
 class GameNotifier extends StateNotifier<GameState> {
-  final CarRepository _carRepository;
+  final QuizCarRepository _carRepository;
   
   GameNotifier(this._carRepository) : super(GameState(
     currentQuestionIndex: 0,

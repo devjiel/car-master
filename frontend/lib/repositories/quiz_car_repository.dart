@@ -3,10 +3,10 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 const int _kCarsPerQuestion = 25;
 
-class CarRepository {
+class QuizCarRepository {
   final SupabaseClient _supabase;
 
-  CarRepository({required SupabaseClient supabase}) : _supabase = supabase;
+  QuizCarRepository({required SupabaseClient supabase}) : _supabase = supabase;
 
   Future<List<QuizCarEntityModel>> getRandomCars() async {
     try {

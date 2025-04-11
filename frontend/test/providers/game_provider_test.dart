@@ -2,9 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:car_master/models/quiz_car_entity.dart';
 import 'package:car_master/providers/game_provider.dart';
-import 'package:car_master/repositories/car_repository.dart';
+import 'package:car_master/repositories/quiz_car_repository.dart';
 
-class MockCarRepository extends Mock implements CarRepository {}
+class MockCarRepository extends Mock implements QuizCarRepository {}
 
 void main() {
 
