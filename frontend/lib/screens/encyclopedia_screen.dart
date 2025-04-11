@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:car_master/providers/encyclopedia_provider.dart';
 import 'package:car_master/models/entities/car_encyclopedia_entity.dart';
 
@@ -86,8 +87,7 @@ class _EncyclopediaScreenState extends ConsumerState<EncyclopediaScreen> {
           clipBehavior: Clip.antiAlias,
           child: InkWell(
             onTap: () {
-              // TODO: Navigate to car detail screen
-              // Navigator.pushNamed(context, '/encyclopedia/${car.id}');
+              context.go('/encyclopedia/${car.id}');
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

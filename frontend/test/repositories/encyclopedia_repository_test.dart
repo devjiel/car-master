@@ -58,7 +58,7 @@ void main() {
       expect(firstPage.length, 20); // pageSize
       expect(firstPage[0].id.startsWith('car_'), true);
       expect(firstPage[0].name.startsWith('Car '), true);
-      expect(firstPage[0].defaultImageUrl?.contains('example.com'), true);
+      expect(firstPage[0].defaultImageUrl.contains('example.com'), true);
 
       // Act - Second page
       final secondPage = await encyclopediaRepository.getCarEncyclopediaList(page: 1);
