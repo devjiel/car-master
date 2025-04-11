@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part '../generated/models/car_encyclopedia_entity.freezed.dart';
-part '../generated/models/car_encyclopedia_entity.g.dart';
+part '../../generated/models/entities/car_encyclopedia_entity.freezed.dart';
+part '../../generated/models/entities/car_encyclopedia_entity.g.dart';
 
 
 @freezed

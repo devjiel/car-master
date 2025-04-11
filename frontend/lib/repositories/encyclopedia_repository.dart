@@ -1,5 +1,5 @@
 import 'package:car_master/models/car_encyclopedia_detail.dart';
-import 'package:car_master/models/car_encyclopedia_entity.dart';
+import 'package:car_master/models/entities/car_encyclopedia_entity.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class EncyclopediaRepository {

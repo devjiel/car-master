@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'quiz_car_entity.dart';
+import 'entities/quiz_car_entity.dart';
 
 @immutable
 class GameState {

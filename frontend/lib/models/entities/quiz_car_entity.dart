@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part '../generated/models/quiz_car_entity.freezed.dart';
-part '../generated/models/quiz_car_entity.g.dart';
+part '../../generated/models/entities/quiz_car_entity.freezed.dart';
+part '../../generated/models/entities/quiz_car_entity.g.dart';
 
 @freezed
 abstract class QuizCarEntityModel with _$QuizCarEntityModel {

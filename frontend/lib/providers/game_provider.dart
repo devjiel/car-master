@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/quiz_car_entity.dart';
+import '../models/entities/quiz_car_entity.dart';
 import '../models/game_state.dart';
 import '../repositories/quiz_car_repository.dart';
 import '../services/supabase_service.dart';

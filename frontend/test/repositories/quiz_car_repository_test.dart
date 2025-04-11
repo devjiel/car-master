@@ -1,4 +1,4 @@
-import 'package:car_master/models/quiz_car_entity.dart';
+import 'package:car_master/models/entities/quiz_car_entity.dart';
 import 'package:car_master/repositories/quiz_car_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_supabase_http_client/mock_supabase_http_client.dart';

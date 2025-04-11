@@ -1,4 +1,4 @@
-import 'package:car_master/models/quiz_car_entity.dart';
+import 'package:car_master/models/entities/quiz_car_entity.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 const int _kCarsPerQuestion = 25;

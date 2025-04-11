@@ -1,4 +1,4 @@
-import 'package:car_master/models/car_encyclopedia_entity.dart';
+import 'package:car_master/models/entities/car_encyclopedia_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part '../generated/models/car_encyclopedia_detail.freezed.dart';
