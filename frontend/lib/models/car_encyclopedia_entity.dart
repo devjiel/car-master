@@ -50,8 +50,11 @@ abstract class BodyStyleEntity with _$BodyStyleEntity {
 abstract class CarEncyclopediaEntity with _$CarEncyclopediaEntity {
   const factory CarEncyclopediaEntity({
     required String id,
+    required String name,
     @JsonKey(name: 'short_description')
     required String shortDescription,
+    @JsonKey(name: 'default_image_url')
+    String? defaultImageUrl,
     required String description,
     @JsonKey(name: 'manufacturer_id')
     required String manufacturerId,
@@ -71,12 +74,12 @@ abstract class CarEncyclopediaEntity with _$CarEncyclopediaEntity {
     required String topSpeed,
     required String dimensions,
     required String weight,
-    @JsonKey(name: 'additional_specs', defaultValue: const {})
+    @JsonKey(name: 'additional_specs', defaultValue: {})
     required Map<String, String> additionalSpecs,
     required String history,
-    @JsonKey(name: 'notable_facts', defaultValue: const [])
+    @JsonKey(name: 'notable_facts', defaultValue: [])
     required List<String> notableFacts,
-    @JsonKey(defaultValue: const [])
+    @JsonKey(defaultValue: [])
     required List<String> awards,
   }) = _CarEncyclopediaEntity;
 
