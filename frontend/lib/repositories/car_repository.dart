@@ -11,7 +11,7 @@ class CarRepository {
   Future<List<CarEntityModel>> getRandomCars() async {
     try {
       final response = await _supabase
-          .from('cars')
+          .from('quiz_cars')
           .select()
           .limit(_kCarsPerQuestion);
       

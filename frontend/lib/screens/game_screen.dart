@@ -109,7 +109,7 @@ class GameScreen extends ConsumerWidget {
               AspectRatio(
                 aspectRatio: 16 / 9, // Standard landscape ratio
                 child: Image.asset(
-                  gameState.currentCar!.imagePath,
+                  gameState.currentCar!.imageUrl,
                   fit: BoxFit.cover,
                 ),
               ),
