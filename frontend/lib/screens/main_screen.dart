@@ -27,6 +27,18 @@ class MainScreen extends StatelessWidget {
                 child: const Text('Start Quizz', style: TextStyle(fontSize: 18)),
               ),
             ),
+            const SizedBox(height: 16),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  context.goNamed(RouteNames.encyclopedia);
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                ),
+                child: const Text('Encyclopedia', style: TextStyle(fontSize: 18)),
+              ),
+            ),
           ],
         ),
       ),
