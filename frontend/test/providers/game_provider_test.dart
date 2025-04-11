@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:car_master/models/car_entity.dart';
+import 'package:car_master/models/quiz_car_entity.dart';
 import 'package:car_master/providers/game_provider.dart';
 import 'package:car_master/repositories/car_repository.dart';
 
@@ -9,36 +9,36 @@ class MockCarRepository extends Mock implements CarRepository {}
 void main() {
 
   final testCars = [
-    const CarEntityModel(
-      id: 1,
+    const QuizCarEntityModel(
+      id: '1',
       brand: 'Tesla',
       model: 'Model S',
       imageUrl: 'assets/images/cars/tesla_model_s.jpg',
       answer: 'Tesla Model S',
     ),
-    const CarEntityModel(
-      id: 2,
+    const QuizCarEntityModel(
+      id: '2',
       brand: 'BMW',
       model: 'i8',
       imageUrl: 'assets/images/cars/bmw_i8.jpg',
       answer: 'BMW i8',
     ),
-    const CarEntityModel(
-      id: 3,
+    const QuizCarEntityModel(
+      id: '3',
       brand: 'Audi',
       model: 'R8',
       imageUrl: 'assets/images/cars/audi_r8.jpg',
       answer: 'Audi R8',
     ),
-    const CarEntityModel(
-      id: 4,
+    const QuizCarEntityModel(
+      id: '4',
       brand: 'Mercedes',
       model: 'AMG GT',
       imageUrl: 'assets/images/cars/mercedes_amg_gt.jpg',
       answer: 'Mercedes AMG GT',
     ),
-    const CarEntityModel(
-      id: 5,
+    const QuizCarEntityModel(
+      id: '5',
       brand: 'Porsche',
       model: '911',
       imageUrl: 'assets/images/cars/porsche_911.jpg',

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'car_entity.dart';
+import 'quiz_car_entity.dart';
 
 @immutable
 class GameState {
@@ -9,7 +9,7 @@ class GameState {
   final bool isAnswered;
   final String? selectedAnswer;
   final bool hasFinished;
-  final List<CarEntityModel> cars;
+  final List<QuizCarEntityModel> cars;
   final bool isLoading;
 
   const GameState({
@@ -23,7 +23,7 @@ class GameState {
     this.isLoading = false,
   });
 
-  CarEntityModel? get currentCar => cars.isNotEmpty && currentQuestionIndex < cars.length 
+  QuizCarEntityModel? get currentCar => cars.isNotEmpty && currentQuestionIndex < cars.length 
       ? cars[currentQuestionIndex] 
       : null;
   int get totalQuestions => cars.length;
@@ -36,7 +36,7 @@ class GameState {
     bool? isAnswered,
     String? selectedAnswer,
     bool? hasFinished,
-    List<CarEntityModel>? cars,
+    List<QuizCarEntityModel>? cars,
     bool? isLoading,
   }) {
     return GameState(
