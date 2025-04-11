@@ -1,19 +1,19 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/car_entity.dart';
+import '../models/entities/quiz_car_entity.dart';
 import '../models/game_state.dart';
-import '../repositories/car_repository.dart';
+import '../repositories/quiz_car_repository.dart';
 import '../services/supabase_service.dart';
 
 // Game state provider with initial loading state
 final gameProvider = StateNotifierProvider<GameNotifier, GameState>((ref) {
-  final carRepository = CarRepository(supabase: SupabaseService.client);
+  final carRepository = QuizCarRepository(supabase: SupabaseService.client);
   return GameNotifier(carRepository);
 });
 
 const kCarsPerQuestion = 5;
 
 class GameNotifier extends StateNotifier<GameState> {
-  final CarRepository _carRepository;
+  final QuizCarRepository _carRepository;
   
   GameNotifier(this._carRepository) : super(GameState(
     currentQuestionIndex: 0,
@@ -27,7 +27,7 @@ class GameNotifier extends StateNotifier<GameState> {
     _initGame();
   }
 
-  List<String> _generateOptions(CarEntityModel currentCar, List<CarEntityModel> allCars) {
+  List<String> _generateOptions(QuizCarEntityModel currentCar, List<QuizCarEntityModel> allCars) {
     if (allCars.length < kCarsPerQuestion) {
       // If not enough cars, repeat some options
       final options = [currentCar.answer];
@@ -56,7 +56,7 @@ class GameNotifier extends StateNotifier<GameState> {
     }
   }
 
-  bool _isCorrectAnswer(String selectedAnswer, CarEntityModel car) {
+  bool _isCorrectAnswer(String selectedAnswer, QuizCarEntityModel car) {
     return selectedAnswer == car.answer;
   }
 
