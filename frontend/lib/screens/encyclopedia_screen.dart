@@ -87,7 +87,7 @@ class _EncyclopediaScreenState extends ConsumerState<EncyclopediaScreen> {
           clipBehavior: Clip.antiAlias,
           child: InkWell(
             onTap: () {
-              context.go('/encyclopedia/${car.id}');
+              context.push('/encyclopedia/${car.id}');
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
