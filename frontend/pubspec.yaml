@@ -116,4 +116,5 @@ flutter:
 
   assets:
     - assets/images/cars/
+    - assets/logos/
     - .env

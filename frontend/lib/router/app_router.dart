@@ -1,3 +1,5 @@
+import 'package:car_master/screens/encyclopedia_detail_screen.dart';
+import 'package:car_master/screens/encyclopedia_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,12 +10,16 @@ import '../screens/game_screen.dart';
 final class RouteNames {
   static const String home = 'home';
   static const String game = 'game';
+  static const String encyclopedia = 'encyclopedia';
+  static const String encyclopediaDetail = 'encyclopedia/:id';
 }
 
 // Les chemins des routes
 final class RoutePaths {
   static const String home = '/';
   static const String game = '/game';
+  static const String encyclopedia = '/encyclopedia';
+  static const String encyclopediaDetail = '/encyclopedia/:id';
 }
 
 // Provider pour accéder au routeur depuis n'importe où dans l'application
@@ -36,6 +42,16 @@ GoRouter createRouter() {
         path: RoutePaths.game,
         name: RouteNames.game,
         builder: (context, state) => const GameScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.encyclopedia,
+        name: RouteNames.encyclopedia,
+        builder: (context, state) => const EncyclopediaScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.encyclopediaDetail,
+        name: RouteNames.encyclopediaDetail,
+        builder: (context, state) => EncyclopediaDetailScreen(id: state.pathParameters['id']),
       ),
     ],
   );
